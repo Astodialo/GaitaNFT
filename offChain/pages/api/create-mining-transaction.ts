@@ -7,6 +7,7 @@ import {
   Transaction,
   KoiosProvider,
   largestFirst,
+  keepRelevant,
 } from "@meshsdk/core";
 import type { Mint } from "@meshsdk/core";
 import { demoMnemonic } from "../../config/wallet";
@@ -62,12 +63,15 @@ export default async function handler(
     },
   };
 
-  const selectedUtxos = largestFirst(10000000, utxos, true);
+  const assetMap = new Map();
+  assetMap.set("lovelace", 100000000)
+  const selectedUtxos = keepRelevant(assetMap, utxos);
 
   const tx = new Transaction({ initiator: appWallet });
   tx.setTxInputs(selectedUtxos);
   tx.mintAsset(script, asset, redeemer,);
   tx.setChangeAddress(recipientAddress);
+  tx.setCollateral(selectedUtxos);
 
   const unsignedTx = await tx.build();
 

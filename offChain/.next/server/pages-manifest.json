@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/api/create-mining-transaction": "pages/api/create-mining-transaction.js"
+  "/api/create-mining-transaction": "pages/api/create-mining-transaction.js",
+  "/": "pages/index.js"
 }
